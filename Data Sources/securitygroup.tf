@@ -22,7 +22,7 @@ resource "aws_security_group" "webservers_sg"{
   
   name          = "${var.ENVIRONMENT}-webservers-sg"
   description   = "Created by Levelup"
-  #vpc_id        = var.vpc_id
+  vpc_id        = aws_vpc.test_vpc.id
 
   ingress {
     from_port = 22
@@ -63,7 +63,7 @@ resource "aws_security_group" "webservers_alb-sg" {
   }
   name = "${var.ENVIRONMENT}-webservers-ALB-sg"
   description = "Created by levelup"
-  #vpc_id      = var.vpc_id 
+  vpc_id      = aws_vpc.test_vpc.id 
 
   ingress {
     from_port = 80

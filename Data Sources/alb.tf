@@ -4,7 +4,7 @@ resource "aws_lb" "project-load-balancer" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.webservers_alb-sg.id]
-#  subnets            = ["${var.vpc_public_subnet1}", "${var.vpc_public_subnet2}"]
+  subnets            = ["${aws_subnet.test_vpc_public_subnet_1.id}", "${aws_subnet.test_vpc_public_subnet_2.id}"]
 
 }
 

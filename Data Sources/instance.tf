@@ -61,7 +61,7 @@ resource "aws_autoscaling_group" "project_webserver" {
     id      = aws_launch_template.launch_template_webserver.id
     version = "$Latest"
   }
-# vpc_zone_identifier       = ["${var.vpc_public_subnet1}", "${var.vpc_public_subnet2}"]
+  vpc_zone_identifier       = ["${aws_subnet.test_vpc_public_subnet_1.id}", "${aws_subnet.test_vpc_public_subnet_2.id}"]
   target_group_arns         = [aws_lb_target_group.load-balancer-target-group.arn]
 }
 
