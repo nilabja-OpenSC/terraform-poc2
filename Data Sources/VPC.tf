@@ -123,9 +123,6 @@ resource "aws_route_table_association" "to_private_subnet2" {
   route_table_id = aws_route_table.private.id
 }
 
-provider "aws" {
-  region     = var.AWS_REGION
-}
 
 #Output Specific to Custom VPC
 output "my_vpc_id" {
