@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "load-balancer-target-group" {
   name     = "load-balancer-target-group"
   port     = 80
   protocol = "HTTP"
-#  vpc_id   = var.vpc_id
+  vpc_id   = aws_vpc.test_vpc.id
 }
 
 # Adding HTTP listener
