@@ -27,3 +27,7 @@ variable "PATH_TO_PRIVATE_KEY" {
 variable "PATH_TO_PUBLIC_KEY" {
   default = "~/.ssh/levelup_key.pub"
 }
+
+variable "INSTANCE_TYPE" {
+  default = "t2.micro"
+}
