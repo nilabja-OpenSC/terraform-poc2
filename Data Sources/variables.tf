@@ -32,11 +32,6 @@ variable "INSTANCE_TYPE" {
   default = "t2.micro"
 }
 
-variable "AWS_REGION" {
-    type        = string
-    default     = "us-east-2"
-}
-
 variable "test_VPC_CIDR_BLOC" {
   description = "The CIDR block for the VPC"
   type        = string
@@ -65,10 +60,4 @@ variable "test_VPC_PRIVATE_SUBNET2_CIDR_BLOCK" {
   description = "The CIDR block for the VPC"
   type        = string
   default     = "10.0.2.0/24"
-}
-
-variable "ENVIRONMENT" {
-  description = "AWS VPC Environment Name"
-  type        = string
-  default     = "Development"
 }
