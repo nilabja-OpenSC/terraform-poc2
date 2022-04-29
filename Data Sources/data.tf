@@ -8,7 +8,9 @@ data "aws_ip_ranges" "us_west_ip_range" {
     services = ["ec2"]
 }
 
-data "aws_availability_zones" "avilable" {}
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 
 data "aws_ami" "latest-amazon-linux" {
   most_recent = true
