@@ -13,7 +13,7 @@ data "aws_availability_zones" "avilable" {}
 data "aws_ami" "latest-amazon-linux" {
   most_recent = true
   owners = ["137112412989"]
-  platform = "Amazon Linux"
+#  platform = "Amazon Linux"
 
   filter {
     name   = "architecture"
