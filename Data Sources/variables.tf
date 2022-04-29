@@ -19,3 +19,11 @@ variable "SSH_CIDR_WEB_SERVER" {
     type = string
     default = "0.0.0.0/0"
 }
+
+variable "PATH_TO_PRIVATE_KEY" {
+  default = "levelup_key"
+}
+
+variable "PATH_TO_PUBLIC_KEY" {
+  default = "levelup_key.pub"
+}
