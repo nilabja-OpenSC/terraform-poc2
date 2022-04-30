@@ -11,20 +11,19 @@ resource "aws_lb" "project-load-balancer" {
 # Add Target Group
 resource "aws_lb_target_group" "load-balancer-target-group" {
   name     = "load-balancer-target-group"
-  target_type = "alb"
   port     = 80
-  protocol = "TCP"
+  protocol = "HTTP"
   vpc_id   = aws_vpc.test_vpc.id
 
   health_check {
     path = "/"
     port = 80
-    #protocol = "HTTP"
-    healthy_threshold = 3
-    #unhealthy_threshold = 3
-    #timeout = 6
+    protocol = "HTTP"
+    healthy_threshold = 5
+    unhealthy_threshold = 2
+    timeout = 5
     interval = 30
-    #matcher = "200"  # has to be HTTP 200 or fails
+    matcher = "200"  # has to be HTTP 200 or fails
   }
 }
 
