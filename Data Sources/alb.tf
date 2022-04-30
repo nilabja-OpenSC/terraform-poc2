@@ -13,13 +13,13 @@ resource "aws_lb_target_group" "load-balancer-target-group" {
   name     = "load-balancer-target-group"
   target_type = "alb"
   port     = 80
-  #protocol = "HTTP"
+  #protocol = "TCP"
   vpc_id   = aws_vpc.test_vpc.id
 
   health_check {
     path = "/"
     port = 80
-    protocol = "TCP"
+    #protocol = "TCP"
     healthy_threshold = 6
     unhealthy_threshold = 2
     timeout = 2
