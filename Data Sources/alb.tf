@@ -20,8 +20,8 @@ resource "aws_lb_target_group" "load-balancer-target-group" {
     path = "/"
     port = 80
     #protocol = "HTTP"
-    healthy_threshold = 6
-    #unhealthy_threshold = 2
+    healthy_threshold = 3
+    #unhealthy_threshold = 3
     #timeout = 6
     interval = 30
     #matcher = "200"  # has to be HTTP 200 or fails
