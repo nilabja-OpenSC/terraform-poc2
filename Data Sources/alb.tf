@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "load-balancer-target-group" {
     unhealthy_threshold = 2
     timeout = 2
     interval = 30
-    matcher = "200"  # has to be HTTP 200 or fails
+    #matcher = "200"  # has to be HTTP 200 or fails
   }
 }
 
