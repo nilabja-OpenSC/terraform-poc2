@@ -27,7 +27,7 @@ resource "aws_launch_configuration" "launch_config_webserver" {
   image_id      = data.aws_ami.latest-amazon-linux.id
   instance_type = var.INSTANCE_TYPE
   user_data = "#!/bin/bash\nyum -y install net-tools nginx\nsudo systemctl start nginx\nMYIP=`MYIP=`ifconfig | grep -E '(inet).*(broadcast)' | awk '{ print $2 }' | cut -d ':' -f2`\necho 'Hello Team\nThis is my IP: '$MYIP > /usr/share/nginx/html/index.html"
-  security_groups = [aws_security_group.levelup_webservers.id]
+  security_groups = [aws_security_group.webservers_sg.id]
   key_name = aws_key_pair.levelup_key.key_name
   
   root_block_device {
