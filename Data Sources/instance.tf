@@ -33,9 +33,9 @@ resource "aws_launch_template" "launch_template_webserver" {
   vpc_security_group_ids = [aws_security_group.webservers_sg.id]
   key_name = aws_key_pair.levelup_key.key_name
   
-  iam_instance_profile {
-    name = "profile-1"
-  }
+  #iam_instance_profile {
+  #  name = "profile-1"
+  #}
 
   #placement {
   #  availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}"]
