@@ -26,7 +26,7 @@ resource "aws_launch_template" "launch_template_webserver" {
   image_id      = data.aws_ami.latest-amazon-linux.id
 # image_id      = lookup(var.AMIS, var.AWS_REGION)
   instance_type = var.INSTANCE_TYPE
-  user_data = base64encode("install_nginx.sh")
+  #user_data = base64encode("install_nginx.sh")
   vpc_security_group_ids = [aws_security_group.webservers_sg.id]
   key_name = aws_key_pair.levelup_key.key_name
   
