@@ -37,9 +37,9 @@ resource "aws_launch_template" "launch_template_webserver" {
     name = "profile-1"
   }
 
-  placement {
-    availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}"]
-  }
+  #placement {
+  #  availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}"]
+  #}
 
   block_device_mappings {
     device_name = "/dev/sda1"
