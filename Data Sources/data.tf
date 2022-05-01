@@ -23,6 +23,11 @@ data "aws_ami" "latest-amazon-linux" {
   }
 
   filter {
+      name = "name"
+      values = ["amzn2-ami-kernel-5.10-hvm-2.0.20220419.0-x86_64-gp2"]
+  }
+
+  filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
