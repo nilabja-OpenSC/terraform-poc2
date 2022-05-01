@@ -23,18 +23,28 @@ resource "aws_key_pair" "levelup_key" {
 
 resource "aws_launch_template" "launch_template_webserver" {
   name   = "launch_template_webserver"
+  disable_api_termination = true
   image_id      = data.aws_ami.latest-amazon-linux.id
 # image_id      = lookup(var.AMIS, var.AWS_REGION)
   instance_type = var.INSTANCE_TYPE
+  instance_initiated_shutdown_behavior = "terminate"
   #user_data = base64encode("install_nginx.sh")
+  user_data = "${base64encode(data.template_file.user_data_nginx.rendered)}"
   vpc_security_group_ids = [aws_security_group.webservers_sg.id]
   key_name = aws_key_pair.levelup_key.key_name
   
+  iam_instance_profile {
+    name = "profile-1"
+  }
+
+  placement {
+    availability_zone = ["${data.aws_availability_zones.available.names[0]}", "${data.aws_availability_zones.available.names[1]}"]
+  }
+
   block_device_mappings {
     device_name = "/dev/sda1"
 
     ebs {
-      volume_type = "gp2"
       volume_size = 20
     }
   }
