@@ -21,9 +21,24 @@ resource "aws_key_pair" "levelup_key" {
 #}
 
 
+resource "aws_launch_configuration" "launch_config_webserver" {
+  name   = "launch_config_webserver"
+  #image_id      = lookup(var.AMIS, var.AWS_REGION)
+  image_id      = data.aws_ami.latest-amazon-linux.id
+  instance_type = var.INSTANCE_TYPE
+  user_data = "#!/bin/bash\nyum -y install net-tools nginx\nsudo systemctl start nginx\nMYIP=`MYIP=`ifconfig | grep -E '(inet).*(broadcast)' | awk '{ print $2 }' | cut -d ':' -f2`\necho 'Hello Team\nThis is my IP: '$MYIP > /usr/share/nginx/html/index.html"
+  security_groups = [aws_security_group.levelup_webservers.id]
+  key_name = aws_key_pair.levelup_key.key_name
+  
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "20"
+  }
+}
+
+
 resource "aws_launch_template" "launch_template_webserver" {
   name   = "launch_template_webserver"
-  disable_api_termination = true
   image_id      = data.aws_ami.latest-amazon-linux.id
 # image_id      = lookup(var.AMIS, var.AWS_REGION)
   instance_type = var.INSTANCE_TYPE
@@ -67,10 +82,11 @@ resource "aws_autoscaling_group" "project_webserver" {
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = true
-  launch_template {
-    id      = aws_launch_template.launch_template_webserver.id
-    version = "$Latest"
-  }
+  #launch_template {
+  #  id      = aws_launch_template.launch_template_webserver.id
+  #  version = "$Latest"
+  #}
+  launch_configuration      = aws_launch_configuration.launch_config_webserver.name
   vpc_zone_identifier       = ["${aws_subnet.test_vpc_public_subnet_1.id}", "${aws_subnet.test_vpc_public_subnet_2.id}"]
   target_group_arns         = [aws_lb_target_group.load-balancer-target-group.arn]
 }
