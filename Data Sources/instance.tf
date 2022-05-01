@@ -80,7 +80,7 @@ resource "aws_autoscaling_group" "project_webserver" {
   min_size                  = 1
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
+  desired_capacity          = 2
   force_delete              = true
   #launch_template {
   #  id      = aws_launch_template.launch_template_webserver.id
